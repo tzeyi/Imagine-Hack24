@@ -203,20 +203,26 @@ class Cards extends Component {
         const position = this._getCardClass(index);
 
         return (
+        <>
           <div
             key={ index }
             onClick={ () => this._cardOnClick(position) }
             style={{
-              ...STYLES.CARD,
-              opacity: getOpacity(position),
-              zIndex: getZIndex(position),
-              transform: getTransform(position, alignment, spread),
-              boxShadow: getBoxShadow(position, alignment, disable_box_shadow),
-              cursor: getCursor(position, alignment),
+                ...STYLES.CARD,
+                opacity: getOpacity(position),
+                zIndex: getZIndex(position),
+                transform: getTransform(position, alignment, spread),
+                boxShadow: getBoxShadow(position, alignment, disable_box_shadow),
+                cursor: getCursor(position, alignment),
             }}
-          >
+            >
             { child }
+            {/* <button 
+            className='absolute top-[85%] right-[10%] m-0 p-0 bg-transparent hover:border-0'>
+                <img src='heart-icon.png' width={50} height={50} className='[&:not(:hover)]:grayscale'/>
+                </button> */}
           </div>
+        </>
         );
       });
   }
