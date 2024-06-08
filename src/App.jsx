@@ -18,9 +18,9 @@ function App() {
           <Route path='/' element={<Landing />} />
           <Route path='/register' element={<Register server_endpoint={server_endpoint}/>} />
           <Route path='/questions' element={<Questions server_endpoint={server_endpoint}/>} />
-          <Route path='/build' element={<BuildProfile server_endpoint={server_endpoint}/>} />
-          <Route path='/discover' element={<Discover />} />
-          <Route path='/interested' element={<Interested />} />
+          <Route path='/build' element={<BuildProfile server_endpoint={server_endpoint}/>}/>
+          <Route path='/discover' element={<Discover server_endpoint={server_endpoint}/>} />
+          <Route path='/interested' element={<Interested server_endpoint={server_endpoint}/>} />
       </Routes>
     </div>
   )
