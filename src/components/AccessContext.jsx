@@ -4,7 +4,9 @@ export const AccessContext = createContext();
 
 export const AccessProvider = ({ children }) => {
   const [isVC, setIsVC] = useState(false);
-  const [baseUURL, setBaseURL] = useState("https://6b38-103-145-154-250.ngrok-free.app");
+  const [baseURL, setBaseURL] = useState("https://6b38-103-145-154-250.ngrok-free.app");
+  const [likedList, setLikedList] = useState([])
+  const [requestList, setRequestList] = useState({})
 
   const updateIsVC = (truth) => {
     setIsVC(truth);
@@ -13,12 +15,30 @@ export const AccessProvider = ({ children }) => {
   const updateBaseURL = (url) => {
     setBaseURL(url);
   }
+  
+  const updateLikedList = (item) => {
+    if (likedList.includes(item))
+        return
+    setLikedList([...likedList, item]);
+  }
+  
+  const updateRequestList = (key, item) => {
+    setRequestList({
+        [key]: item,
+        ...requestList
+    });
+  }
 
   const value = { 
     isVC,
-    baseUURL,
+    baseURL,
+    likedList,
+    requestList,
     updateIsVC,
-    updateBaseURL
+    updateBaseURL,
+    updateLikedList,
+    updateRequestList
+
    };
 
   return (

@@ -1,36 +1,77 @@
 import { Component, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Cards from "../../components/Cards";
 import Card from "../../components/Card";
 import { AccessContext } from "../../components/AccessContext";
 
-function Discover() {
+import axios from "axios";
+
+function Discover({server_endpoint}) {
 
     // const { baseURL } = useContext(AccessContext)
 
-    const baseURL = 'https://6b38-103-145-154-250.ngrok-free.app'
-
     const [startups, setStartups] = useState([])
-    const [url, setUrl] = useState("/api/v1/startups/")
-
-    const fetchMoreData = () =>
-        fetch(baseURL + url, {method: "GET"})
-          .then((response) => {
-            if (!response.ok) throw Error(response.statusText);
-            console.log(response)
-            // return response.json();
-          })
-          .then((data) => {
-            setStartups([...startups, ...data.results]);
-            console.log()
-            setUrl(data.next);
-          })
-          .catch((error) => console.log(error));
+    const [url, setUrl] = useState("/api/v1/startups/?username=ychengpoon")
 
     useEffect(() => {
-        fetchMoreData();
+        // window.sessionStorage.setItem("username", "ychengpoon")
+        // window.localStorage.setItem("username", "ychengpoon")
+        axios
+            .get(
+                server_endpoint + url,
+                {
+                    headers: {
+                        "ngrok-skip-browser-warning": "69420",
+                    }
+                }
+            )
+            .then((response) => {
+                console.log(response.data)
+                return response.data
+            })
+            .then((data) => {
+                console.log(data)
+                setStartups([...startups, ...data["startups"]])
+                setUrl(data["next"])
+                console.log(startups)
+                console.log(url)
+            });
+
+        // fetch(baseURL + '/', {
+        //     method: "GET",
+        //     mode: 'no-cors'
+        // })
+        //   .then((response) => {
+        //     if (!response.ok) throw Error(response.statusText);
+        //     console.log(response)
+        //     console.log(response.json())
+        //     // return response.json();
+        //   })
+        //   .then((data) => {
+        //     setStartups([...startups, ...data.results]);
+        //     console.log()
+        //     setUrl(data.next);
+        //   })
+        //   .catch((error) => console.log(error));
     }, [])
+
+    function renderStartups() {
+        return (
+  
+            startups.map((comp) => (
+                <Card 
+                key={comp.name}
+                name={comp.name}
+                username={comp.username}
+                filename={comp.filename}
+                points={comp.points}
+                industry={comp.industry}
+                summary={comp.summary}
+                server_endpoint={server_endpoint}
+                />
+            )   
+        ))
+    }
 
     return (
         <div className="w-100 h-100 p-10 bg-[url('blob-discover.svg')]">
@@ -39,12 +80,12 @@ function Discover() {
             </div>
             <div className="h-[75vh] flex justify-center items-center">
                 <Cards spread="narrow" disable_fade_in={true}>
-                    <Card />
-                    <Card />
-                    <Card />
+                    {
+                        renderStartups()
+                    }                    
+
                 </Cards>
             </div>
-            <div className="text-center w-100 flex justify-center"><Navbar /></div>
             <div className="text-center w-100 flex justify-center"><Navbar /></div>
         </div>
     )
