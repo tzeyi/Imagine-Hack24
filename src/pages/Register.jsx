@@ -1,15 +1,15 @@
 import { useContext, useState } from "react";
 import { AccessContext } from "../components/AccessContext";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
     const {isVC} = useContext(AccessContext)
-
+    const navigate = useNavigate()
     const endpoint = "https://6b38-103-145-154-250.ngrok-free.app"
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert(`${name}, ${userName}, ${image}`);
-        clearForm();
+        navigate('/questions')
     };
 
 
@@ -22,15 +22,17 @@ function Register() {
                 <h1>
                     I'm a&nbsp;
             <span className="bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] inline-block text-transparent bg-clip-text">
-                {!isVC
-                ? <>Startup.</>
-                : <>Venture Capitalist.</>}
+                {isVC
+                ? <>Venture Capitalist.</>
+                : <>Startup.</>
+                }
             </span>
                 </h1>   
             </div>
             
             <div className="w-full max-w-lg h-[80%] flex justify-center items-center">
                 <form 
+                    onSubmit={handleSubmit}
                     class="w-full max-w-lg" 
                     method="post"
                     action={`${endpoint}/api/v1/account/create/`}
@@ -43,8 +45,8 @@ function Register() {
                         <input
                             type="text"
                             name="name"
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" placeholder="Jane" />
-                        <p class=" text-xs italic">Please fill out this field.</p>
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" placeholder="Jane" />
+                        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -76,8 +78,8 @@ function Register() {
                         <input
                             type="file"
                             name="file"
-                            class="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" placeholder="Jane" />
-                        {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" placeholder="Jane" />
+                        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
@@ -112,7 +114,6 @@ function Register() {
                         <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
                         </div>
                     </div>
-                    <input type="hidden" name="type" value={isVC} required/>
                     <button 
                             type="submit"
                             className="btn btn-active bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] text-white"> Sign Up 

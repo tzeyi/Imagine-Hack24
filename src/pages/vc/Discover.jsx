@@ -12,7 +12,7 @@ function Discover() {
     const baseURL = 'https://6b38-103-145-154-250.ngrok-free.app'
 
     const [startups, setStartups] = useState([])
-    const [url, setUrl] = useState("/api/v1/questions/")
+    const [url, setUrl] = useState("/api/v1/startups/")
 
     const fetchMoreData = () =>
         fetch(baseURL + url, {method: "GET"})
@@ -44,6 +44,7 @@ function Discover() {
                     <Card />
                 </Cards>
             </div>
+            <div className="text-center w-100 flex justify-center"><Navbar /></div>
             <div className="text-center w-100 flex justify-center"><Navbar /></div>
         </div>
     )
