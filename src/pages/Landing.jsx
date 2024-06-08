@@ -16,13 +16,14 @@ function Landing() {
     
     function handleNotVC(e) {
         e.preventDefault()
+        updateIsVC(false)
         navigate('/register')
     }
 
     return (
-        <div className="flex flex-col w-[90vw] lg:flex-row margin-auto">
-            <div className="grid flex-grow h-[860px] w-[100vw] card bg-base-300 rounded-box rounded-l-[10%]
-             justify-start items-end text-[28px] border-y-2 border-l-2 border-black"
+        <div className="flex flex-col w-auto lg:flex-row m-auto justify-center items-center h-100 ">
+            <div className="grid flex-grow h-[100vh] w-[100vw] card bg-slate-100 rounded-box rounded-l-[10%]
+             justify-start items-end text-[28px]"
              onClick={handleNotVC}
              >
                 <h1 className='font-bold text-black text-left w-[50%]'>
@@ -30,14 +31,13 @@ function Landing() {
                 </h1>
             </div>
             <div className="
-                grid flex-grow h-[860px] w-[100vw] card bg-base-300
-                rounded-r-[10%] place-items-center 
+                grid flex-grow h-[100vh] w-[100vw] card bg-base-300 rounded-0
                 bg-gradient-to-r from-[#C96FF4] to-[#FF35DF]
                 justify-start items-end text-[28px]
-                border-y-2 border-r-2 border-black"
+                place-items-end"
                 onClick={handleVC}
                 >
-                <h1 className='font-bold text-white text-right w-[50%] flex'>
+                <h1 className='font-bold text-white text-right w-[50%] flex m-3'>
                     I'm a Venture Capitalist
                 </h1>
             </div>

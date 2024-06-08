@@ -9,20 +9,20 @@ function Discover() {
             <div className="font-bold">
                 <h1><span className="bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] inline-block text-transparent bg-clip-text">Discover</span> Startups!</h1>
             </div>
-            <div className="h-[80vh] flex justify-center items-center">
-                <Cards spread="narrow">
-                    <div className="h-[480px] w-[320px] pt-5 text-center bg-slate-500 text-white text-md rounded-[15px]">
+            <div className="h-[75vh] flex justify-center items-center">
+                <Cards spread="narrow" disable_fade_in={true}>
+                    <div className="h-[540px] w-[420px] pt-5 text-center bg-slate-500 text-white text-md rounded-[15px]">
                     First Card
                     </div>
-                    <div className="h-[480px] w-[320px] pt-5 text-center bg-slate-500 text-white text-md rounded-[15px]">
+                    <div className="h-[540px] w-[420px] pt-5 text-center bg-slate-500 text-white text-md rounded-[15px]">
                     Two Card
                     </div>
-                    <div className="h-[480px] w-[320px] pt-5 text-center bg-slate-500 text-white text-md rounded-[15px]">
+                    <div className="h-[540px] w-[420px] pt-5 text-center bg-slate-500 text-white text-md rounded-[15px]">
                     Third Card
                     </div>
                 </Cards>
             </div>
-            <div><Navbar /></div>
+            <div className="text-center w-100 flex justify-center"><Navbar /></div>
         </div>
     )
 }
