@@ -14,17 +14,19 @@ function Register() {
 
 
     return (
-        <div>
-            <div className="flex">
+        <div className="flex flex-row w-[100vw] h-[100vh] pt-[5vh] bg-[url('blob-discover.svg')]">
+            <div className="pl-[10vw]">
                 <img src="arrow.svg"/>
-
-                {{isVC} 
-                ? <h1>I'm a Startup. </h1>
-                : <h1> I'm a Venture Capitalist. </h1>
-                }
             </div>
 
-            <div className="">
+            <div>
+                <div>
+                    {{isVC} 
+                    ? <h1>I'm a Startup. </h1>
+                    : <h1> I'm a Venture Capitalist. </h1>
+                    }
+                </div>
+                
                 <form
                     method="post"
                     action={`${endpoint}/api/v1/account/create/`}
@@ -96,8 +98,9 @@ function Register() {
                             type="submit"
                             className="btn btn-active bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] text-white"> Sign Up 
                         </button>
-                </form>                    
-            </div>         
+                </form>                          
+            </div>
+       
         </div>
     );
 }
