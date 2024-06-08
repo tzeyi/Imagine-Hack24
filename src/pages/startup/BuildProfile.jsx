@@ -1,7 +1,7 @@
 function BuildProfile() {
     return (
         <>
-        BuildProfile
+            BuildProfile
         </>
     )
 }

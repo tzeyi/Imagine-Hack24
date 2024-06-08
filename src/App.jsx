@@ -10,13 +10,13 @@ import Interested from './pages/vc/Interested'
 
 function App() {
   // API endpoints
-  const server_endpoint = "https://6b38-103-145-154-250.ngrok-free.app"
+  const server_endpoint = "https://f92e1742af3d.ngrok.app"
 
   return (
     <div>
       <Routes>
           <Route path='/' element={<Landing />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/register' element={<Register server_endpoint={server_endpoint}/>} />
           <Route path='/questions' element={<Questions server_endpoint={server_endpoint}/>} />
           <Route path='/build' element={<BuildProfile />} />
           <Route path='/discover' element={<Discover />} />
