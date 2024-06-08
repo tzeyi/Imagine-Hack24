@@ -1,92 +1,72 @@
-import { useState } from "react";
-import MyButton from "../../components/button";
-// import { AccessContext }
-
-const PasswordErrorMessage = () => {
-    return (
-        <p className="FieldError">Password should have at least 8 characters</p>
-    );
-};
+import { useContext, useState } from "react";
+import { AccessContext } from "../components/AccessContext";
 
 function Register() {
-    const [name, setName] = useState("");
-    const [userName, setUserName] = useState("");
-    const [image, setImage] = useState("");
-    const [password, setPassword] = useState({ 
-        value: "", 
-        isTouched: false, 
-    }); 
-    const [industry, setIndustry] = useState("");
-    const [summary, setSummary] = useState("");
+    const {isVC} = useContext(AccessContext)
 
-    const clearForm = () => {
-        setName("");
-        setUserName("");
-        setImage("");
-        setPassword({
-            value: "",
-            isTouched: false,
-        });
-        setIndustry("");
-        setSummary("")
-    };
+    const endpoint = "https://6b38-103-145-154-250.ngrok-free.app/"
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("Account created!");
+        alert(`${name}, ${userName}, ${image}`);
         clearForm();
     };
 
 
     return (
-        <>
-            <h1>I'm a Startup </h1>
-            <br/>
+        <div>
+            <div className="flex">
+                <img src="arrow.svg"/>
 
-            <form onSubmit={handleSubmit}>
-                <fieldset>
+                {{isVC} 
+                ? <h1>I'm a Startup. </h1>
+                : <h1> I'm a Venture Capitalist. </h1>
+                }
+            </div>
+
+            <div className="">
+                <form
+                    method="post"
+                    action={`${endpoint}/api/v1/account/create/`}
+                    enctype="multipart/form-data"
+                >
+
+                    <input type="hidden" name="type" value={isVC} required/>
+
                     <div className="Field">
-                        <label>Name</label>
+                        <label> Name</label>
                         <input
+                            type="text"
+                            name="name"
                             className="input input-bordered input-secondary w-full max-w-xs"   
-                            value={name}
-                            onChange={(e) => {
-                                setName(e.target.value);
-                            }}
                             placeholder="Name"
+                            required
                         />
                     </div>
                     <div className="Field">
                         <label>Username</label>
                         <input
+                            type="text"
+                            name="username"
                             className="input input-bordered input-secondary w-full max-w-xs"
-                            value={userName}
-                            onChange={(e) => {
-                                setUserName(e.target.value);
-                            }}
                             placeholder="Username"
                         />
                     </div>
                     <div className="Field">
                         <label>Image</label>
                         <input
-                            className="input input-bordered input-secondary w-full max-w-xs"
-                            value={image}
-                            onChange={(e) => {
-                                setImage(e.target.value);
-                            }}
+                            type="file"
+                            name="file"
+                            className="file-input file-input-bordered file-input-secondary w-full max-w-xs" 
                             placeholder="Image"
                         />
                     </div>
                     <div className="Field">
                         <label>Password</label>
                         <input
+                            name="password"
                             className="input input-bordered input-secondary w-full max-w-xs"
-                            value={password.value}
                             type="password"
-                            onChange={(e) => {
-                                setPassword({ ...password, value: e.target.value });
-                            }}
                             placeholder="Password"
                         />
                     </div>
@@ -94,35 +74,31 @@ function Register() {
                     <div className="Field">
                         <label> Industry </label>
                         <input
+                            type="text"
+                            name="industry"
                             className="input input-bordered input-secondary w-full max-w-xs"
-                            value={industry.value}
-                            onChange={(e) => {
-                                setIndustry(e.target.industry);
-                            }}
+                            placeholder="Industry"
                         />
                     </div>
 
-                    <label className="form-control w-full max-w-xs">
-                        <span className="label">
-                            Summary
-                        </span>
-                        <textarea className="textarea textarea-secondary" placeholder="Bio"></textarea>
+                    
+                    <label> Summary <label/>
+                        <input 
+                            type="text"
+                            name="summary"
+                            placeholder="Summary"
+                        />
                     </label>
-{/* 
-                    <MyButton 
-                        // type="submit"
-                        className="btn-secondary"
-                        isPrimary={true}
-                        content="Sign Up" */}
-                    />
 
-                    {/* <button type="submit">
-                        Sign Up
-                    </button> */}
 
-                </fieldset>
-            </form>            
-        </>
+                    <br/>
+                        <button 
+                            type="submit"
+                            className="btn btn-active bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] text-white"> Sign Up 
+                        </button>
+                </form>                    
+            </div>         
+        </div>
     );
 }
 

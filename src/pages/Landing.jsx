@@ -4,13 +4,13 @@ import { useContext } from 'react'
 import { AccessContext } from '../components/AccessContext'
 
 function Landing() {
-    const { setIsVC } = useContext(AccessContext)
+    const { updateIsVC } = useContext(AccessContext)
 
     const navigate = useNavigate()
 
     function handleVC(e) {
         e.preventDefault()
-        setIsVC(true)
+        updateIsVC(true)
         navigate('/register')
     }
     
