@@ -1,4 +1,6 @@
 import { useState } from "react";
+import MyButton from "../../components/button";
+// import { AccessContext }
 
 const PasswordErrorMessage = () => {
     return (
@@ -18,14 +20,15 @@ function Register() {
     const [summary, setSummary] = useState("");
 
     const clearForm = () => {
-        setFirstName("");
-        setLastName("");
-        setEmail("");
+        setName("");
+        setUserName("");
+        setImage("");
         setPassword({
             value: "",
             isTouched: false,
         });
-        setRole("role");
+        setIndustry("");
+        setSummary("")
     };
 
     const handleSubmit = (e) => {
@@ -34,11 +37,12 @@ function Register() {
         clearForm();
     };
 
+
     return (
         <>
             <h1>I'm a Startup </h1>
             <br/>
-            
+
             <form onSubmit={handleSubmit}>
                 <fieldset>
                     <div className="Field">
@@ -104,11 +108,17 @@ function Register() {
                         </span>
                         <textarea className="textarea textarea-secondary" placeholder="Bio"></textarea>
                     </label>
+{/* 
+                    <MyButton 
+                        // type="submit"
+                        className="btn-secondary"
+                        isPrimary={true}
+                        content="Sign Up" */}
+                    />
 
-
-                    <button type="submit">
+                    {/* <button type="submit">
                         Sign Up
-                    </button>
+                    </button> */}
 
                 </fieldset>
             </form>            
