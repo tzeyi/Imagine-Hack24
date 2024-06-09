@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { AccessContext } from "./AccessContext"
 
+import { motion } from "framer-motion"
+
 function Card({name, username, industry, filename, points, summary, server_endpoint}) {
     const { updateRequestList, updateLikedList } = useContext(AccessContext)
     const imageUrl = server_endpoint + "/api/v1/uploads/" + filename + '/'
@@ -11,6 +13,9 @@ function Card({name, username, industry, filename, points, summary, server_endpo
 
     function handleSubmit(e) {
         e.preventDefault()
+        if (!liked) {
+            return
+        }
 
         const url = server_endpoint + "/api/v1/request_startup_info/?username=ychengpoon&company=" + username
 
@@ -74,11 +79,14 @@ function Card({name, username, industry, filename, points, summary, server_endpo
 
             >
                 <input type="hidden" value="company_user" name="username" />
-                <button className='absolute top-[85%] right-[10%] m-0 p-0 bg-transparent hover:border-0 z-100'
+                <motion.button 
+                className='absolute top-[85%] right-[10%] m-0 p-0 bg-transparent hover:border-0 z-100'
                     onClick={() => setLiked(!liked)}
+                    whileHover={{scale: 1.1}}
+                    whileTap={{scale: 0.8}}
                 >
                     <img src='heart-icon.png' width={50} height={50} className={`${liked ? "grayscale-0" : "[&:not(:hover)]:grayscale"}`} />
-                </button>
+                </motion.button>
             </form>
             </div>
             {/* <img src='replace-image.png'  alt="icons" /> */}

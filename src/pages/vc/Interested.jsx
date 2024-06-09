@@ -13,12 +13,18 @@ function Interested({server_endpoint}) {
     const [url, setUrl] = useState("")
 
     useEffect(() => {
+
         if (companyUser in requestList) {
             setSummaryId(requestList[companyUser].summary_id)
             console.log(requestList[companyUser].summary_id)
             setUrl(requestList[companyUser].url + "/?username=ychengpoon")
             console.log(requestList[companyUser].url + "/?username=ychengpoon")
+        } else {
+            setReport("Data may not be available.")
         }
+
+        // Declare a boolean flag that we can use to cancel the API request.
+        let ignoreStaleRequest = false;
 
         axios
         .get(
@@ -34,13 +40,23 @@ function Interested({server_endpoint}) {
             return response.data
         })
         .then((data) => {
-            console.log(data)
-            setReport(data["summary"])
+            if (!ignoreStaleRequest) {
+                console.log(data)
+                setReport(data["summary"])
+            }
         })
         .catch((error) => {
             console.error(error)
         });
-    }, [companyUser])
+
+        return () => {
+            // This is a cleanup function that runs whenever the Post component
+            // unmounts or re-renders. If a Post is about to unmount or re-render, we
+            // should avoid updating state.
+            ignoreStaleRequest = true;
+        };
+
+    })
 
     // function handleClick(e) {
     //     e.preventDefault()
@@ -83,16 +99,16 @@ function Interested({server_endpoint}) {
                                     ><a>{item.company_name}</a></li>
                                 ))
                             }
-                            <li><a>Company 1</a></li>
-                            <li><a>Company 2</a></li>
-                            <li><a>Company 3</a></li>
-                            <li><a>Company 3</a></li>
+                            <li><a>Meta</a></li>
+                            <li><a>Micr*soft</a></li>
+                            <li><a>Netflicks</a></li>
+                            <li><a>Amazo0n</a></li>
+                            <li><a>VSee</a></li>
 
                         </ul>
                     </div>
                     <div className="p-3 overflow-scroll relative max-w-[80%] text-left right-0">
-                        {report}
-                        {report == '' ? "Data is processing" : "Loading data..."}
+                        {report == '' ? "Data is processing" : report}
                     </div>
                 </div>
             </div>

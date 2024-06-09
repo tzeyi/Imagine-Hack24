@@ -116,7 +116,7 @@ function Questions({ server_endpoint }) {
                             onSubmit={handleSubmit}
                             method="post"
                             // action={`${endpoint}`}
-                            enctype="multipart/form-data"
+                            // enctype="multipart/form-data"
                         >
                             <textarea
                                 name="answer"

@@ -79,7 +79,7 @@ function Discover({server_endpoint}) {
                 <h1 className="text-black"><span className="bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] inline-block text-transparent bg-clip-text">Discover</span> Startups!</h1>
             </div>
             <div className="h-[75vh] flex justify-center items-center">
-                <Cards spread="narrow" disable_fade_in={true}>
+                <Cards spread="narrow" disable_fade_in={false}>
                     {
                         renderStartups()
                     }                    

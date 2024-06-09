@@ -93,7 +93,7 @@ function BuildProfile({ server_endpoint }) {
 
             <h2 className="font-bold my-5"> Please let us know more about you, as well as your company. </h2>
 
-            <div className="mx-80 mt-20">
+            <div className="mx-80 mt-20 h-[620px] relative overflow-scroll">
                 {prevQuestions.map((q, index) => 
                     <div className="mb-10" key={index}>
                         <div class="chat chat-start">
@@ -131,7 +131,9 @@ function BuildProfile({ server_endpoint }) {
                         <input name="answer" className="input input-bordered input-secondary w-3/4 mt-10"/>
                         <button
                             type="submit" 
-                            className="btn btn-active bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] text-white w-1/6 ra font-bold">
+                            className="btn btn-active bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] text-white w-1/6 ra font-bold
+                            static
+                            ">
                             Send
                         </button>
                     </div>
