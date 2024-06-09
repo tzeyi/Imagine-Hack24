@@ -56,7 +56,6 @@ function BuildProfile({ server_endpoint }) {
 
         const formData = new FormData(e.target)
         const dataAnswer = formData.get("answer")
-        console.log(dataAnswer)
 
         fetch(`${server_endpoint}/api/v1/answers/?username=aaa`,
         {
@@ -80,7 +79,8 @@ function BuildProfile({ server_endpoint }) {
         })
         .catch((error) => console.log(error));
 
-        setPrevAnswers(() => [...prevAnswers, dataAnswer])
+        setTimeout(() => {
+            setPrevAnswers(() => [...prevAnswers, dataAnswer])}, 150);
 
         e.target.reset()
     }
@@ -93,38 +93,40 @@ function BuildProfile({ server_endpoint }) {
 
             <h2 className="font-bold my-5"> Please let us know more about you, as well as your company. </h2>
 
-            <div className="mx-80 mt-20 h-[620px] relative overflow-scroll">
-                {prevQuestions.map((q, index) => 
-                    <div className="mb-10" key={index}>
-                        <div class="chat chat-start">
-                            <div class="chat-image avatar">
-                                <div class="w-10 rounded-full">
-                                <img src={start_up_profile_pic} />
+            <div className="mx-80 mt-20 static h-3/4">
+                <div className="overflow-y-auto h-3/4">
+                    {prevQuestions.map((q, index) => 
+                        <div className="mb-10" key={index}>
+                            <div class="chat chat-start">
+                                <div class="chat-image avatar">
+                                    <div class="w-10 rounded-full">
+                                    <img src={start_up_profile_pic} />
+                                    </div>
                                 </div>
+                                <div class="chat-header">
+                                    Apple Inc (VC)
+                                </div>
+                                <div class="chat-bubble chat-bubble-secondary font-bold">{prevQuestions[index]}</div>
                             </div>
-                            <div class="chat-header">
-                                Apple Inc (VC)
-                            </div>
-                            <div class="chat-bubble chat-bubble-secondary font-bold">{prevQuestions[index]}</div>
-                        </div>
 
-                        <div class="chat chat-end">
-                            <div class="chat-image avatar">
-                                <div class="w-10 rounded-full">
-                                <img src={vc_profile_pic} />
+                            <div class="chat chat-end">
+                                <div class="chat-image avatar">
+                                    <div class="w-10 rounded-full">
+                                    <img src={vc_profile_pic} />
+                                    </div>
                                 </div>
+                                <div class="chat-header">
+                                    NVIDIA (Startup)
+                                </div>
+                                <div class="chat-bubble chat-bubble-secondary font-bold">{prevAnswers[index]}</div>
                             </div>
-                            <div class="chat-header">
-                                NVIDIA (Startup)
-                            </div>
-                            <div class="chat-bubble chat-bubble-secondary font-bold">{prevAnswers[index]}</div>
                         </div>
-                    </div>
-                    
-                )}
+                    )}
+                </div>
+
 
                 <form 
-                    className="mt-10"
+                    className="mt-10 w-4/6 absolute mx-20"
                     onSubmit={handleSubmit}
                 >
                     <div>
