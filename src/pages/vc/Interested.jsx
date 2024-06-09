@@ -107,7 +107,7 @@ function Interested({server_endpoint}) {
 
                         </ul>
                     </div>
-                    <div className="p-3 overflow-scroll relative max-w-[80%] text-left right-0">
+                    <div className="p-3 overflow-scroll relative max-w-[80%] text-left right-0 whitespace-pre-line">
                         {report == '' ? "Data is processing" : report}
                     </div>
                 </div>
