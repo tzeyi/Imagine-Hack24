@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 
 function BuildProfile({ server_endpoint }) {
-    // profile pic
-    // start-up username
-    // vc username
-    // questions
-    // answers
     const [questionId, setQuestionId] = useState()
 
     const [prevQuestions, setPrevQuestions] = useState([])
     const [prevAnswers, setPrevAnswers] = useState([])
 
-    const vc_profile_pic = "nvidia-logo.jpeg"
-    const start_up_profile_pic = "apple-logo.webp"
+    const vc_profile_pic = "apple-logo.webp"
+    const start_up_profile_pic = "orange-cat.jpeg"
 
     useEffect(() => {
         // Declare a boolean flag that we can use to cancel the API request.
@@ -80,7 +75,7 @@ function BuildProfile({ server_endpoint }) {
         .catch((error) => console.log(error));
 
         setTimeout(() => {
-            setPrevAnswers(() => [...prevAnswers, dataAnswer])}, 150);
+            setPrevAnswers(() => [...prevAnswers, dataAnswer])}, 170);
 
         e.target.reset()
     }
@@ -93,14 +88,14 @@ function BuildProfile({ server_endpoint }) {
 
             <h2 className="font-bold my-5"> Please let us know more about you, as well as your company. </h2>
 
-            <div className="mx-80 mt-20 static h-3/4">
+            <div className="mx-80 mt-12 h-3/4">
                 <div className="overflow-y-auto h-3/4">
                     {prevQuestions.map((q, index) => 
                         <div className="mb-10" key={index}>
                             <div class="chat chat-start">
                                 <div class="chat-image avatar">
                                     <div class="w-10 rounded-full">
-                                    <img src={start_up_profile_pic} />
+                                    <img src={vc_profile_pic} />
                                     </div>
                                 </div>
                                 <div class="chat-header">
@@ -112,11 +107,11 @@ function BuildProfile({ server_endpoint }) {
                             <div class="chat chat-end">
                                 <div class="chat-image avatar">
                                     <div class="w-10 rounded-full">
-                                    <img src={vc_profile_pic} />
+                                    <img src={start_up_profile_pic} />
                                     </div>
                                 </div>
                                 <div class="chat-header">
-                                    NVIDIA (Startup)
+                                    Cat.io (Startup)
                                 </div>
                                 <div class="chat-bubble chat-bubble-secondary font-bold">{prevAnswers[index]}</div>
                             </div>
@@ -124,18 +119,15 @@ function BuildProfile({ server_endpoint }) {
                     )}
                 </div>
 
-
                 <form 
-                    className="mt-10 w-4/6 absolute mx-20"
+                    className="mt-10 w-full mr-12"
                     onSubmit={handleSubmit}
                 >
                     <div>
-                        <input name="answer" className="input input-bordered input-secondary w-3/4 mt-10"/>
+                        <input name="answer" className="input input-bordered input-secondary w-3/4 mt-10" required/>
                         <button
                             type="submit" 
-                            className="btn btn-active bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] text-white w-1/6 ra font-bold
-                            static
-                            ">
+                            className="btn btn-active bg-gradient-to-r from-[#C96FF4] to-[#FF35DF] text-white w-1/6 ra font-bold">
                             Send
                         </button>
                     </div>

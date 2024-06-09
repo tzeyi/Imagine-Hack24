@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AccessContext } from "../../components/AccessContext";
 
 function Questions({ server_endpoint }) {
     const [questions, setQuestions] = useState([])
@@ -7,6 +8,7 @@ function Questions({ server_endpoint }) {
     const [progress, setProgress] = useState(0)
     const [loading, setLoading] = useState(false)
 
+    const {isVC} = useContext(AccessContext)
     const navigate = useNavigate()
 
     const max_progress = 5
@@ -82,7 +84,12 @@ function Questions({ server_endpoint }) {
                 .then((response) => {
                     if (!response.ok) throw Error(response.statusText);
                     setLoading(true)
-                    navigate('/build')
+
+                    if (isVC){
+                        navigate('/discover')
+                    } else {
+                        navigate('/build')
+                    }
 
                     return response.json();
                 })
