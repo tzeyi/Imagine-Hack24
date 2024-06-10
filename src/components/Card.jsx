@@ -23,7 +23,7 @@ function Card({name, username, industry, filename, points, summary, server_endpo
             "company_name": name,
             "company_user": username
         })
-
+        console.log("Startup info request sent out.")
         axios
             .post(
                 url,
@@ -39,7 +39,7 @@ function Card({name, username, industry, filename, points, summary, server_endpo
             })
             .then((data) => {
                 console.log(data)
-                console.log()
+                console.log("Startup info request received.")
             })
             .catch((error) => {
                 console.error(error)

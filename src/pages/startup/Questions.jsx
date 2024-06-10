@@ -12,7 +12,7 @@ function Questions({ server_endpoint }) {
     const navigate = useNavigate()
 
     const max_progress = 5
-
+    console.log(isVC)
     // Data to post to back end
     const results = []
 
@@ -24,7 +24,6 @@ function Questions({ server_endpoint }) {
         fetch(`${server_endpoint}/api/v1/questions/?size=${max_progress}&username=ychengpoon`,
             {
                 credentials: "same-origin",
-                mode: "cors",
             })
             .then((response) => {
                 if (!response.ok) throw Error(response.statusText);
@@ -39,7 +38,7 @@ function Questions({ server_endpoint }) {
 
                     data.questions.forEach(question => {
                         data_questions_id.push(question.question_id)
-                        data_questions.push(question.text)
+                        data_questions.push(question.question)
                     })
 
                     setQuestionId(data_questions_id)
@@ -72,7 +71,6 @@ function Questions({ server_endpoint }) {
             fetch(`${server_endpoint}/api/v1/answers/?username=ychengpoon`,
                 {
                     credentials: "same-origin",
-                    mode: "cors",
                     method: "post",
                     body: JSON.stringify({
                         "data": results

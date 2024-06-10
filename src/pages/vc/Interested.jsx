@@ -21,6 +21,7 @@ function Interested({server_endpoint}) {
             console.log(requestList[companyUser].url + "/?username=ychengpoon")
         } else {
             setReport("Data may not be available.")
+            return
         }
 
         // Declare a boolean flag that we can use to cancel the API request.
@@ -29,11 +30,6 @@ function Interested({server_endpoint}) {
         axios
         .get(
             server_endpoint + url,
-            {
-                headers: {
-                    "ngrok-skip-browser-warning": "69420",
-                }
-            }
         )
         .then((response) => {
             console.log(response)
@@ -42,7 +38,8 @@ function Interested({server_endpoint}) {
         .then((data) => {
             if (!ignoreStaleRequest) {
                 console.log(data)
-                setReport(data["summary"])
+                console.log(data["summary"] + "\n\n==LOGFILE==\n\n" + data["log"])
+                setReport(data["summary"] + "\n\n==LOGFILE==\n\n" + data["log"])
             }
         })
         .catch((error) => {
@@ -99,16 +96,21 @@ function Interested({server_endpoint}) {
                                     ><a>{item.company_name}</a></li>
                                 ))
                             }
-                            <li><a>Meta</a></li>
-                            <li><a>Micr*soft</a></li>
-                            <li><a>Netflicks</a></li>
-                            <li><a>Amazo0n</a></li>
-                            <li><a>VSee</a></li>
+                            <li
+                            onClick={(e) => setCompanyUser("meta")}><a>Meta</a></li>
+                            <li
+                            onClick={(e) => setCompanyUser("microsoft")}><a>Micsoft</a></li>
+                            <li
+                            onClick={(e) => setCompanyUser("netflicks")}><a>Netflicks</a></li>
+                            <li
+                            onClick={(e) => setCompanyUser("amazon")}><a>Amazo0n</a></li>
+                            <li
+                            onClick={(e) => setCompanyUser("vsee")}><a>VSee</a></li>
 
                         </ul>
                     </div>
                     <div className="p-3 overflow-scroll relative max-w-[80%] text-left right-0 whitespace-pre-line">
-                        {report == '' ? "Data is processing" : report}
+                        {report == '' || report == undefined ? "Data is processing" : report }
                     </div>
                 </div>
             </div>

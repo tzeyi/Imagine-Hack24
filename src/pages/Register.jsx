@@ -6,9 +6,25 @@ function Register( {server_endpoint} ) {
     const {isVC} = useContext(AccessContext)
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/questions')
+         console.log("aaaaaaaaaaaaa");
+
+         const formData = new FormData(e.target)
+
+        fetch(`${server_endpoint}/api/v1/account/create/`,
+            {
+                body: formData,
+                method: "post"
+            }
+        )
+        .then((response) => {
+            if (response.ok) {
+                navigate('/questions')
+            }
+        });
+    
+   
     };
 
     const handleBackArrow = (e) => {
@@ -37,8 +53,8 @@ function Register( {server_endpoint} ) {
 
                 <div className="w-full flex justify-center">
                     <form
-                        method="post"
-                        action={`${server_endpoint}/api/v1/account/create/`}
+                        // method="post"
+                        // action={`${server_endpoint}/api/v1/account/create/`}
                         enctype="multipart/form-data"
                         className="w-full max-w-lg"
                         onSubmit={handleSubmit}
@@ -84,16 +100,17 @@ function Register( {server_endpoint} ) {
                             <div className="flex flex-col justify-center items-start">
                                 <label className="font-bold"> Industry </label>
                                 <select 
-                                    disabled={isVC}
                                     name="industry"
                                     className="select select-secondary w-full max-w-xs"
                                     required
+                                    defaultValue={"none"}
                                 >
-                                    <option value={"automotive"}>Automotive</option>
-                                    <option value={"healthcare"}>Healthcare</option>
-                                    <option value={"technology"}>Technology</option>
-                                    <option value={"food"}>Food</option>
-                                    <option value={"financial"}>Financial</option>
+                                    <option value={"none"}>None</option>
+                                    {!isVC &&  <option value={"automotive"}>Automotive</option> }
+                                   {!isVC &&   <option value={"healthcare"}>Healthcare</option> }
+                                   {!isVC &&   <option value={"technology"}>Technology</option> }
+                                   {!isVC &&   <option value={"food"}>Food</option> }
+                                   {!isVC &&   <option value={"financial"}>Financial</option> }
                                 </select>
                             </div>
                         </div>
